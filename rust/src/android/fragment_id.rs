@@ -37,18 +37,3 @@ pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_fragmentIdAsBytes(
   })
   .jresult(&env)
 }
-
-#[allow(non_snake_case)]
-#[no_mangle]
-pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_fragmentIdFromBytes(
-  env: JNIEnv, _: JObject, bytes: jbyteArray
-) -> jobject {
-  handle_exception_result(|| {
-    env
-      .convert_byte_array(bytes)
-      .into_result()
-      .and_then(|bytes| FragmentId::from_bytes(&bytes).into_result())
-      .and_then(|fragment_id| fragment_id.rptr().jptr(&env))
-  })
-  .jresult(&env)
-}
