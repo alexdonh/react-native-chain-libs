@@ -133,15 +133,15 @@ export class PublicKey extends Ptr {
 
 /**
 */
-export class SingleAddress extends Ptr {}
+export class SingleAddress extends Ptr { }
 
 /**
 */
-export class GroupAddress extends Ptr {}
+export class GroupAddress extends Ptr { }
 
 /**
 */
-export class AccountAddress extends Ptr {}
+export class AccountAddress extends Ptr { }
 
 /**
 * An address of any type, this can be one of
@@ -399,7 +399,7 @@ export class Outputs extends Ptr {
         const ret = await ChainLibs.outputsNew();
         return Ptr._wrap(ret, Outputs);
     }
-    
+
     /**
     * @returns {Promise<number>}
     */
@@ -640,6 +640,42 @@ export class Fragment extends Ptr {
 }
 
 /**
+*/
+export class PerCertificateFee extends Ptr {
+    /**
+    * @returns {Promise<PerCertificateFee>}
+    */
+    static async new() {
+        var ret = await ChainLibs.perCertificateFeeNew();
+        return Ptr._wrap(ret, PerCertificateFee);
+    }
+    /**
+    * @param {Value} val
+    * @returns {Promise<void>}
+    */
+    set_pool_registration(val) {
+        const valPtr = Ptr._assertClass(val, Value);
+        return ChainLibs.perCertificateFeeSetPoolRegistration(this.ptr, valPtr);
+    }
+    /**
+    * @param {Value} val
+    * @returns {Promise<void>}
+    */
+    set_stake_delegation(val) {
+        const valPtr = Ptr._assertClass(val, Value);
+        return ChainLibs.perCertificateFeeSetStakeDelegation(this.ptr, valPtr);
+    }
+    /**
+    * @param {Value} val
+    * @returns {Promise<void>}
+    */
+    set_owner_stake_delegation(val) {
+        const valPtr = Ptr._assertClass(val, Value);
+        return ChainLibs.perCertificateFeeSetOwnerStakeDelegation(this.ptr, valPtr);
+    }
+}
+
+/**
 * Algorithm used to compute transaction fees
 * Currently the only implementation if the Linear one
 */
@@ -649,13 +685,15 @@ export class Fee extends Ptr {
     * @param {Value} constant
     * @param {Value} coefficient
     * @param {Value} certificate
+    * @param {PerCertificateFee} perCertificateFee
     * @returns {Promise<Fee>}
     */
-    static async linear_fee(constant, coefficient, certificate) {
+    static async linear_fee(constant, coefficient, certificate, perCertificateFee) {
         const constantPtr = Ptr._assertClass(constant, Value);
         const coefficientPtr = Ptr._assertClass(coefficient, Value);
         const certificatePtr = Ptr._assertClass(certificate, Value);
-        const ret = await ChainLibs.feeLinearFee(constantPtr, coefficientPtr, certificatePtr);
+        const perCertificateFeePtr = Ptr._assertClass(perCertificateFee, PerCertificateFee);
+        const ret = await ChainLibs.feeLinearFee(constantPtr, coefficientPtr, certificatePtr, perCertificateFeePtr);
         return Ptr._wrap(ret, Fee);
     }
 
@@ -1346,7 +1384,7 @@ export class StakeDelegationAuthData extends Ptr {
 
 /**
 */
-export class PoolId extends Ptr {}
+export class PoolId extends Ptr { }
 
 /**
 * Delegation Ratio type express a number of parts
@@ -1360,7 +1398,7 @@ export class PoolId extends Ptr {}
 * and by extension parts need to be equal to the sum of individual
 * pools parts.
 */
-export class DelegationRatio extends Ptr {}
+export class DelegationRatio extends Ptr { }
 
 /**
 * Set the choice of delegation:
@@ -1405,7 +1443,7 @@ export class DelegationType extends Ptr {
         const ret = await ChainLibs.delegationTypeGetKind(this.ptr);
         return ret;
     }
-    
+
     /**
     * @returns {Promise<PoolId | undefined>}
     */
@@ -1417,7 +1455,7 @@ export class DelegationType extends Ptr {
 
 /**
 */
-export class AccountIdentifier extends Ptr {}
+export class AccountIdentifier extends Ptr { }
 
 /**
 */
@@ -1471,15 +1509,15 @@ export class StakeDelegation extends Ptr {
 
 /**
 */
-export class PoolRegistration extends Ptr {}
+export class PoolRegistration extends Ptr { }
 
 /**
 */
-export class PoolRetirement extends Ptr {}
+export class PoolRetirement extends Ptr { }
 
 /**
 */
-export class OwnerStakeDelegation extends Ptr {}
+export class OwnerStakeDelegation extends Ptr { }
 
 /**
 */

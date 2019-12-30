@@ -97,7 +97,7 @@ dependencies = [
 [[package]]
 name = "cardano-legacy-address"
 version = "0.1.1"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 dependencies = [
  "cbor_event 2.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "cryptoxide 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -143,7 +143,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "chain-addr"
 version = "0.1.0"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 dependencies = [
  "bech32 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -155,7 +155,7 @@ dependencies = [
 [[package]]
 name = "chain-core"
 version = "0.1.0"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 dependencies = [
  "cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -163,7 +163,7 @@ dependencies = [
 [[package]]
 name = "chain-crypto"
 version = "0.1.0"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 dependencies = [
  "bech32 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -182,7 +182,7 @@ dependencies = [
 [[package]]
 name = "chain-impl-mockchain"
 version = "0.1.0"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 dependencies = [
  "cardano-legacy-address 0.1.1 (git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo)",
  "cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -204,7 +204,7 @@ dependencies = [
 [[package]]
 name = "chain-storage"
 version = "0.1.0"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 dependencies = [
  "chain-core 0.1.0 (git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo)",
 ]
@@ -212,7 +212,7 @@ dependencies = [
 [[package]]
 name = "chain-time"
 version = "0.1.0"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 dependencies = [
  "cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -378,7 +378,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "imhamt"
 version = "0.1.0"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 
 [[package]]
 name = "itoa"
@@ -405,8 +405,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "js-chain-libs"
-version = "0.5.0"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+version = "0.6.1"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 dependencies = [
  "bech32 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "chain-addr 0.1.0 (git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo)",
@@ -573,7 +573,7 @@ version = "0.1.0"
 dependencies = [
  "cbindgen 0.9.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "jni 0.13.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "js-chain-libs 0.5.0 (git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo)",
+ "js-chain-libs 0.6.1 (git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo)",
  "wasm-bindgen 0.2.55 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -650,7 +650,7 @@ dependencies = [
 [[package]]
 name = "sparse-array"
 version = "0.1.0"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 
 [[package]]
 name = "strsim"
@@ -730,7 +730,7 @@ dependencies = [
 [[package]]
 name = "typed-bytes"
 version = "0.1.0"
-source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f3170b00e0ab0fd43ff4e6ecca93f669da04b318"
+source = "git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo#f986ffe35e19b2db28fe97e1f69920f3bf1b176b"
 
 [[package]]
 name = "typenum"
@@ -923,7 +923,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum itoa 0.4.4 (registry+https://github.com/rust-lang/crates.io-index)" = "501266b7edd0174f8530248f87f99c88fbe60ca4ef3dd486835b8d8d53136f7f"
 "checksum jni 0.13.1 (registry+https://github.com/rust-lang/crates.io-index)" = "7e00f1fd30a82a801f8bf38bcb0895088a0013cde111acb713c0824edc372aa4"
 "checksum jni-sys 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = "8eaf4bc02d17cbdd7ff4c7438cafcdf7fb9a4613313ad11b4f8fefe7d3fa0130"
-"checksum js-chain-libs 0.5.0 (git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo)" = "<none>"
+"checksum js-chain-libs 0.6.1 (git+https://github.com/Emurgo/js-chain-libs.git?branch=emurgo)" = "<none>"
 "checksum js-sys 0.3.32 (registry+https://github.com/rust-lang/crates.io-index)" = "1c840fdb2167497b0bd0db43d6dfe61e91637fa72f9d061f8bd17ddc44ba6414"
 "checksum lazy_static 1.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 "checksum libc 0.2.66 (registry+https://github.com/rust-lang/crates.io-index)" = "d515b1f41455adea1313a4a2ac8a8a477634fbae63cc6100e3aebb207ce61558"

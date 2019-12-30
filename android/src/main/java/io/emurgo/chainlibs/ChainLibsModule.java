@@ -422,9 +422,9 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
     // Fee
 
     @ReactMethod
-    public final void feeLinearFee(String constant, String coefficient, String certificate, Promise promise) {
+    public final void feeLinearFee(String constant, String coefficient, String certificate, String perCertificateFee, Promise promise) {
         Native.I
-                .feeLinearFee(new RPtr(constant), new RPtr(coefficient), new RPtr(certificate))
+                .feeLinearFee(new RPtr(constant), new RPtr(coefficient), new RPtr(certificate), new RPtr(perCertificateFee))
                 .map(RPtr::toJs)
                 .pour(promise);
     }
@@ -1104,6 +1104,37 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
         Native.I
                 .delegationTypeGetFull(new RPtr(delegationType))
                 .map(RPtr::toJs)
+                .pour(promise);
+    }
+
+    // PerCertificateFee
+
+    @ReactMethod
+    public final void perCertificateFeeNew(Promise promise) {
+        Native.I
+                .perCertificateFeeNew()
+                .map(RPtr::toJs)
+                .pour(promise);
+    }
+
+    @ReactMethod
+    public final void perCertificateFeeSetPoolRegistration(String perCertificateFee, String val, Promise promise) {
+        Native.I
+                .perCertificateFeeSetPoolRegistration(new RPtr(perCertificateFee), new RPtr(val))
+                .pour(promise);
+    }
+
+    @ReactMethod
+    public final void perCertificateFeeSetStakeDelegation(String perCertificateFee, String val, Promise promise) {
+        Native.I
+                .perCertificateFeeSetPoolRegistration(new RPtr(perCertificateFee), new RPtr(val))
+                .pour(promise);
+    }
+
+    @ReactMethod
+    public final void perCertificateFeeSetOwnerStakeDelegation(String perCertificateFee, String val, Promise promise) {
+        Native.I
+                .perCertificateFeeSetPoolRegistration(new RPtr(perCertificateFee), new RPtr(val))
                 .pour(promise);
     }
 

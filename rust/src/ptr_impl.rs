@@ -29,6 +29,7 @@ impl RPtrRepresentable for Outputs {}
 impl RPtrRepresentable for OwnerStakeDelegation {}
 impl RPtrRepresentable for Payload {}
 impl RPtrRepresentable for PayloadAuthData {}
+impl RPtrRepresentable for PerCertificateFee {}
 impl RPtrRepresentable for PoolId {}
 impl RPtrRepresentable for PoolRegistration {}
 impl RPtrRepresentable for PoolRetirement {}

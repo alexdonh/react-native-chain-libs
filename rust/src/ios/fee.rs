@@ -2,19 +2,21 @@ use super::result::CResult;
 use super::string::CharPtr;
 use crate::panic::{handle_exception_result, Zip};
 use crate::ptr::{RPtr, RPtrRepresentable};
-use js_chain_libs::{Fee, Transaction, Value};
+use js_chain_libs::{Fee, PerCertificateFee, Transaction, Value};
 
 #[no_mangle]
 pub unsafe extern "C" fn fee_linear_fee(
-  constant: RPtr, coefficient: RPtr, certificate: RPtr, result: &mut RPtr, error: &mut CharPtr
+  constant: RPtr, coefficient: RPtr, certificate: RPtr, per_certificate_fee: RPtr,
+  result: &mut RPtr, error: &mut CharPtr
 ) -> bool {
   handle_exception_result(|| {
     constant
       .typed_ref::<Value>()
       .zip(coefficient.typed_ref::<Value>())
       .zip(certificate.typed_ref::<Value>())
-      .map(|((constant, coefficient), certificate)| {
-        Fee::linear_fee(constant, coefficient, certificate)
+      .zip(per_certificate_fee.typed_ref::<PerCertificateFee>())
+      .map(|(((constant, coefficient), certificate), per_certificate_fee)| {
+        Fee::linear_fee(constant, coefficient, certificate, per_certificate_fee)
       })
   })
   .map(|fee| fee.rptr())
