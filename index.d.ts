@@ -187,6 +187,12 @@ export class Account extends Ptr {
 */
 export class Input extends Ptr {
   /**
+  * @param {UtxoPointer} utxo_pointer
+  * @returns {Promise<Input>}
+  */
+  static from_utxo(utxo_pointer: UtxoPointer): Promise<Input>;
+
+  /**
   * @param {Account} account
   * @param {Value} v
   * @returns {Promise<Input>}
@@ -348,9 +354,9 @@ export class FragmentId extends Ptr {
 
   /**
    * @param {Uint8Array} bytes
-   * @returns {Promise<FragmentId>} 
+   * @returns {Promise<FragmentId>}
    */
-   static from_bytes(bytes: Uint8Array): Promise<Address>;
+   static from_bytes(bytes: Uint8Array): Promise<FragmentId>;
 }
 
 /**

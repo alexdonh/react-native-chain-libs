@@ -309,6 +309,16 @@ export class Account extends Ptr {
 /**
 */
 export class Input extends Ptr {
+  /**
+  * @param {UtxoPointer} utxo_pointer
+  * @returns {Promise<Input>}
+  */
+  static async from_utxo(utxo_pointer) {
+      const utxoPtr = Ptr._assertClass(utxo_pointer, UtxoPointer);
+      const ret = await ChainLibs.inputFromUtxo(utxoPtr);
+      return Ptr._wrap(ret, Input);
+  }
+
     /**
     * @param {Account} account
     * @param {Value} v

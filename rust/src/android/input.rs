@@ -6,7 +6,22 @@ use crate::ptr::RPtrRepresentable;
 use jni::objects::JObject;
 use jni::sys::{jlong, jobject};
 use jni::JNIEnv;
-use js_chain_libs::{Account, Input, Inputs, Value};
+use js_chain_libs::{UtxoPointer, Account, Input, Inputs, Value};
+
+#[allow(non_snake_case)]
+#[no_mangle]
+pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_inputFromUtxo(
+  env: JNIEnv, _: JObject, utxo_pointer: JRPtr
+) -> jobject {
+  handle_exception_result(|| {
+    let utxo_pointer = utxo_pointer.rptr(&env)?;
+    utxo_pointer
+      .typed_ref::<UtxoPointer>()
+      .map(|utxo_ptr| Input::from_utxo(utxo_ptr))
+      .and_then(|input| input.rptr().jptr(&env))
+  })
+  .jresult(&env)
+}
 
 #[allow(non_snake_case)]
 #[no_mangle]

@@ -81,6 +81,7 @@ final class Native {
     public final native Result<RPtr> accountSingleFromPublicKey(RPtr key);
 
     // Input
+    public final native Result<RPtr> inputFromUtxo(RPtr utxoPointer);
     public final native Result<RPtr> inputFromAccount(RPtr account, RPtr v);
     public final native Result<RPtr> inputValue(RPtr input);
 
