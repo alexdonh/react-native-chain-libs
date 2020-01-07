@@ -134,7 +134,6 @@ final class Native {
     // FragmentId
     public final native Result<RPtr> fragmentIdCalculate(byte[] bytes);
     public final native Result<byte[]> fragmentIdAsBytes(RPtr fragmentId);
-    public final native Result<RPtr> fragmentIdFromBytes(byte[] bytes);
 
     // TransactionSignDataHash
     public final native Result<RPtr> transactionSignDataHashFromBytes(byte[] bytes);

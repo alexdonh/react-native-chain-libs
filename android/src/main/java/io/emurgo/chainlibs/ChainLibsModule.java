@@ -638,14 +638,6 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
                 .pour(promise);
     }
 
-    @ReactMethod
-     public final void fragmentIdFromBytes(String bytes, Promise promise) {
-         Native.I
-                 .fragmentIdFromBytes(Base64.decode(bytes, Base64.DEFAULT))
-                 .map(RPtr::toJs)
-                 .pour(promise);
-     }
-
     // TransactionSignDataHash
 
     @ReactMethod
