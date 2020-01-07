@@ -371,6 +371,14 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
     // Input
 
     @ReactMethod
+    public final void inputFromUtxo(String utxoPointer, Promise promise) {
+        Native.I
+                .inputFromUtxo(new RPtr(utxoPointer))
+                .map(RPtr::toJs)
+                .pour(promise);
+    }
+
+    @ReactMethod
     public final void inputFromAccount(String account, String v, Promise promise) {
         Native.I
                 .inputFromAccount(new RPtr(account), new RPtr(v))

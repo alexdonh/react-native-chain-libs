@@ -505,6 +505,17 @@ RCT_EXPORT_METHOD(accountSingleFromPublicKey:(nonnull NSString *)keyPtr  withRes
     }] exec:keyPtr andResolve:resolve orReject:reject];
 }
 
+RCT_EXPORT_METHOD(inputFromUtxo:(nonnull NSString *)utxoPtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSString* utxoPtr, CharPtr* error) {
+        RPtr result;
+        RPtr utxo_pointer = [utxoPtr rPtr];
+        return input_from_utxo(utxo_pointer, &result, error)
+            ? [NSString stringFromPtr:result]
+            : nil;
+    }] exec:utxo_pointer andResolve:resolve orReject:reject];
+}
+
 RCT_EXPORT_METHOD(inputFromAccount:(nonnull NSString *)account withV:(nonnull NSString *)v withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
 {
     [[CSafeOperation new:^NSString*(NSArray* params, CharPtr* error) {
