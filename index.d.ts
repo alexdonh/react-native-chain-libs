@@ -840,6 +840,13 @@ export class InputOutputBuilder extends Ptr {
   estimate_fee(fee: Fee, payload: Payload): Promise<Value>;
 
   /**
+  * @param {Payload} payload
+  * @param {Fee} fee_algorithm
+  * @returns {Promise<Balance>}
+  */
+  get_balance(payload: Payload, fee_algorithm: Fee): Promise<Balance>;
+
+  /**
   * @returns {Promise<InputOutput>}
   */
   build(): Promise<InputOutput>;

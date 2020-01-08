@@ -41,6 +41,21 @@ pub unsafe extern "C" fn input_output_builder_add_output(
 }
 
 #[no_mangle]
+pub unsafe extern "C" fn input_output_builder_get_balance(
+  io_builder: RPtr, payload: RPtr, fee: RPtr, result: &mut RPtr, error: &mut CharPtr
+) -> bool {
+  handle_exception_result(|| {
+    io_builder
+      .typed_ref::<InputOutputBuilder>()
+      .zip(payload.typed_ref::<Payload>())
+      .zip(fee.typed_ref::<Fee>())
+      .and_then(|((io_builder, payload), fee)| io_builder.get_balance(payload, fee).into_result())
+  })
+  .map(|balance| balance.rptr())
+  .response(result, error)
+}
+
+#[no_mangle]
 pub unsafe extern "C" fn input_output_builder_estimate_fee(
   io_builder: RPtr, fee: RPtr, payload: RPtr, result: &mut RPtr, error: &mut CharPtr
 ) -> bool {

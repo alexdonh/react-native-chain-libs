@@ -746,6 +746,14 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public final void inputOutputBuilderGetBalance(String ioBuilder, String payload, String fee, Promise promise) {
+        Native.I
+                .inputOutputBuilderGetBalance(new RPtr(ioBuilder), new RPtr(payload), new RPtr(fee))
+                .map(RPtr::toJs)
+                .pour(promise);
+    }
+
+    @ReactMethod
     public final void inputOutputBuilderBuild(String ioBuilder, Promise promise) {
         Native.I
                 .inputOutputBuilderBuild(new RPtr(ioBuilder))

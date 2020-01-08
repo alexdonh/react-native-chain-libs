@@ -1322,6 +1322,18 @@ export class InputOutputBuilder extends Ptr {
     }
 
     /**
+    * @param {Payload} payload
+    * @param {Fee} feeAlgorithm
+    * @returns {Balance}
+    */
+    async get_balance(payload, feeAlgorithm) {
+        const payloadPtr = Ptr._assertClass(payload, Payload);
+        const feePtr = Ptr._assertClass(feeAlgorithm, Fee);
+        const ret = await ChainLibs.inputOutputBuilderGetBalance(this.ptr, payloadPtr, feePtr);
+        return Ptr._wrap(ret, Balance);
+    }
+
+    /**
     * @returns {Promise<InputOutput>}
     */
     async build() {
