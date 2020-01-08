@@ -422,7 +422,7 @@ export class Outputs extends Ptr {
     */
     async get(index) {
         const ret = await ChainLibs.outputsGet(this.ptr, index);
-        return Ptr._wrap(ret, Ptr);
+        return Ptr._wrap(ret, Output);
     }
 
     /**
