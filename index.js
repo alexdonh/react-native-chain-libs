@@ -409,7 +409,7 @@ export class Outputs extends Ptr {
         const ret = await ChainLibs.outputsNew();
         return Ptr._wrap(ret, Outputs);
     }
-    
+
     /**
     * @returns {Promise<number>}
     */
@@ -517,6 +517,15 @@ export class FragmentId extends Ptr {
     async as_bytes() {
         const b64 = await ChainLibs.fragmentIdAsBytes(this.ptr);
         return Uint8ArrayFromB64(b64);
+    }
+
+    /**
+     * @param {Uint8Array} bytes
+     * @returns {Promise<FragmentId>}
+     */
+     static async from_bytes(bytes) {
+         const ret = await ChainLibs.fragmentIdFromBytes(b64FromUint8Array(bytes));
+         return Ptr._wrap(ret, FragmentId);
     }
 }
 
@@ -1415,7 +1424,7 @@ export class DelegationType extends Ptr {
         const ret = await ChainLibs.delegationTypeGetKind(this.ptr);
         return ret;
     }
-    
+
     /**
     * @returns {Promise<PoolId | undefined>}
     */

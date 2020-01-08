@@ -859,6 +859,17 @@ RCT_EXPORT_METHOD(fragmentIdAsBytes:(nonnull NSString *)fragmentIdPtr withResolv
     }] exec:fragmentIdPtr andResolve:resolve orReject:reject];
 }
 
+RCT_EXPORT_METHOD(fragmentIdFromBytes:(nonnull NSString *)bytesStr  withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+ {
+     [[CSafeOperation new:^NSString*(NSString* bytesStr, CharPtr* error) {
+         RPtr result;
+         NSData* data = [NSData fromBase64:bytesStr];
+         return fragment_id_from_bytes((uint8_t*)data.bytes, data.length, &result, error)
+             ? [NSString stringFromPtr:result]
+             : nil;
+     }] exec:bytesStr andResolve:resolve orReject:reject];
+ }
+
 RCT_EXPORT_METHOD(transactionSignDataHashFromBytes:(nonnull NSString *)bytesStr  withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
 {
     [[CSafeOperation new:^NSString*(NSString* bytesStr, CharPtr* error) {
