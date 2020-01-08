@@ -44,15 +44,15 @@ export class Ptr {
 
 /**
 */
-export class SingleAddress extends Ptr {}
+export class SingleAddress extends Ptr { }
 
 /**
 */
-export class GroupAddress extends Ptr {}
+export class GroupAddress extends Ptr { }
 
 /**
 */
-export class AccountAddress extends Ptr {}
+export class AccountAddress extends Ptr { }
 
 /**
 * An address of any type, this can be one of
@@ -317,6 +317,33 @@ export class Transaction extends Ptr {
 }
 
 /**
+*/
+export class PerCertificateFee extends Ptr {
+  /**
+  * @returns {Promise<PerCertificateFee>} 
+  */
+  static new(): Promise<PerCertificateFee>;
+
+  /**
+  * @param {Value} val 
+  * @returns {Promise<void>}
+  */
+  set_pool_registration(val: Value): Promise<void>;
+
+  /**
+  * @param {Value} val 
+  * @returns {Promise<void>}
+  */
+  set_stake_delegation(val: Value): Promise<void>;
+
+  /**
+  * @param {Value} val 
+  * @returns {Promise<void>}
+  */
+  set_owner_stake_delegation(val: Value): Promise<void>;
+}
+
+/**
 * Algorithm used to compute transaction fees
 * Currently the only implementation if the Linear one
 */
@@ -326,9 +353,10 @@ export class Fee extends Ptr {
   * @param {Value} constant
   * @param {Value} coefficient
   * @param {Value} certificate
+  * @param {PerCertificateFee} perCertificateFee
   * @returns {Promise<Fee>}
   */
-  static linear_fee(constant: Value, coefficient: Value, certificate: Value): Promise<Fee>;
+  static linear_fee(constant: Value, coefficient: Value, certificate: Value, perCertificateFee: PerCertificateFee): Promise<Fee>;
 
   /**
   * Compute the fee if possible (it can fail in case the values are out of range)
@@ -873,7 +901,7 @@ export class StakeDelegationAuthData extends Ptr {
 
 /**
 */
-export class PoolId extends Ptr {}
+export class PoolId extends Ptr { }
 
 /**
 * Delegation Ratio type express a number of parts
@@ -887,7 +915,7 @@ export class PoolId extends Ptr {}
 * and by extension parts need to be equal to the sum of individual
 * pools parts.
 */
-export class DelegationRatio extends Ptr {}
+export class DelegationRatio extends Ptr { }
 
 /**
 * Set the choice of delegation:
@@ -927,7 +955,7 @@ export class DelegationType extends Ptr {
 
 /**
 */
-export class AccountIdentifier extends Ptr {}
+export class AccountIdentifier extends Ptr { }
 
 /**
 */
@@ -964,15 +992,15 @@ export class StakeDelegation extends Ptr {
 
 /**
 */
-export class PoolRegistration extends Ptr {}
+export class PoolRegistration extends Ptr { }
 
 /**
 */
-export class PoolRetirement extends Ptr {}
+export class PoolRetirement extends Ptr { }
 
 /**
 */
-export class OwnerStakeDelegation extends Ptr {}
+export class OwnerStakeDelegation extends Ptr { }
 
 /**
 */

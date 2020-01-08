@@ -582,17 +582,18 @@ RCT_EXPORT_METHOD(inputsAdd:(nonnull NSString *)inputsPtr withItem:(nonnull NSSt
     }] exec:@[inputsPtr, item] andResolve:resolve orReject:reject];
 }
 
-RCT_EXPORT_METHOD(feeLinearFee:(nonnull NSString *)constant withCoefficient:(nonnull NSString *)coefficient andCertificate:(nonnull NSString *)certificate withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(feeLinearFee:(nonnull NSString *)constant withCoefficient:(nonnull NSString *)coefficient andCertificate:(nonnull NSString *)certificate andPerCertificateFee:(nonnull NSString *)perCertificateFee withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
 {
     [[CSafeOperation new:^NSString*(NSArray* params, CharPtr* error) {
         RPtr result;
         RPtr constant = [[params objectAtIndex:0] rPtr];
         RPtr coefficient = [[params objectAtIndex:1] rPtr];
         RPtr certificate = [[params objectAtIndex:2] rPtr];
-        return fee_linear_fee(constant, coefficient, certificate, &result, error)
+        RPtr perCertificateFee = [[params objectAtIndex:3] rPtr];
+        return fee_linear_fee(constant, coefficient, certificate, perCertificateFee, &result, error)
             ? [NSString stringFromPtr:result]
             : nil;
-    }] exec:@[constant, coefficient, certificate] andResolve:resolve orReject:reject];
+    }] exec:@[constant, coefficient, certificate, perCertificateFee] andResolve:resolve orReject:reject];
 }
 
 RCT_EXPORT_METHOD(feeCalculate:(nonnull NSString *)feePtr withTx:(nonnull NSString *)txPtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
@@ -1513,6 +1514,46 @@ RCT_EXPORT_METHOD(delegationTypeGetFull:(nonnull NSString *)delegationTypePtr wi
             ? [NSString stringFromPtr:result]
             : nil;
     }] exec:delegationTypePtr andResolve:resolve orReject:reject];
+}
+
+RCT_EXPORT_METHOD(perCertificateFeeNew:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(id _void, CharPtr* error) {
+        RPtr result;
+        return per_certificate_fee_new(&result, error)
+            ? [NSString stringFromPtr:result]
+            : nil;
+    }] exec:nil andResolve:resolve orReject:reject];
+}
+
+RCT_EXPORT_METHOD(perCertificateFeeSetPoolRegistration:(nonnull NSString *)perCertificateFeePtr withValPtr:(nonnull NSString *)valPtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSArray* params, CharPtr* error) {
+        RPtr perCertificateFee = [[params objectAtIndex:0] rPtr];
+        RPtr val = [[params objectAtIndex:1] rPtr];
+        per_certificate_fee_set_pool_registration(perCertificateFee, val, error);
+        return nil;
+    }] exec:@[perCertificateFeePtr, valPtr] andResolve:resolve orReject:reject];
+}
+
+RCT_EXPORT_METHOD(perCertificateFeeSetStakeDelegation:(nonnull NSString *)perCertificateFeePtr withValPtr:(nonnull NSString *)valPtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSArray* params, CharPtr* error) {
+        RPtr perCertificateFee = [[params objectAtIndex:0] rPtr];
+        RPtr val = [[params objectAtIndex:1] rPtr];
+        per_certificate_fee_set_stake_delegation(perCertificateFee, val, error);
+        return nil;
+    }] exec:@[perCertificateFeePtr, valPtr] andResolve:resolve orReject:reject];
+}
+
+RCT_EXPORT_METHOD(perCertificateFeeSetOwnerStakeDelegation:(nonnull NSString *)perCertificateFeePtr withValPtr:(nonnull NSString *)valPtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSArray* params, CharPtr* error) {
+        RPtr perCertificateFee = [[params objectAtIndex:0] rPtr];
+        RPtr val = [[params objectAtIndex:1] rPtr];
+        per_certificate_fee_set_owner_stake_delegation(perCertificateFee, val, error);
+        return nil;
+    }] exec:@[perCertificateFeePtr, valPtr] andResolve:resolve orReject:reject];
 }
 
 RCT_EXPORT_METHOD(ptrFree:(NSString *)ptr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)

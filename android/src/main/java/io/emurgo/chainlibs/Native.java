@@ -92,7 +92,7 @@ final class Native {
     public final native Result<Void> inputsAdd(RPtr inputs, RPtr item);
 
     // Fee
-    public final native Result<RPtr> feeLinearFee(RPtr constant, RPtr coefficient, RPtr certificate);
+    public final native Result<RPtr> feeLinearFee(RPtr constant, RPtr coefficient, RPtr certificate, RPtr perCertificateFee);
     public final native Result<RPtr> feeCalculate(RPtr fee, RPtr tx);
 
     // OutputPolicy
@@ -223,6 +223,12 @@ final class Native {
     public final native Result<RPtr> delegationTypeRatio(RPtr r);
     public final native Result<RPtr> delegationTypeGetKind(RPtr delegationType);
     public final native Result<RPtr> delegationTypeGetFull(RPtr delegationType);
+
+    // PerCertificateFee
+    public final native Result<RPtr> perCertificateFeeNew();
+    public final native Result<Void> perCertificateFeeSetPoolRegistration(RPtr perCertificateFee, RPtr val);
+    public final native Result<Void> perCertificateFeeSetStakeDelegation(RPtr perCertificateFee, RPtr val);
+    public final native Result<Void> perCertificateFeeSetOwnerStakeDelegation(RPtr perCertificateFee, RPtr val);
 
     public final native void ptrFree(RPtr ptr);
 }

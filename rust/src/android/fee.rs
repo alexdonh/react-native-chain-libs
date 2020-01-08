@@ -5,23 +5,26 @@ use crate::ptr::RPtrRepresentable;
 use jni::objects::JObject;
 use jni::sys::jobject;
 use jni::JNIEnv;
-use js_chain_libs::{Fee, Transaction, Value};
+use js_chain_libs::{Fee, PerCertificateFee, Transaction, Value};
 
 #[allow(non_snake_case)]
 #[no_mangle]
 pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_feeLinearFee(
-  env: JNIEnv, _: JObject, constant: JRPtr, coefficient: JRPtr, certificate: JRPtr
+  env: JNIEnv, _: JObject, constant: JRPtr, coefficient: JRPtr, certificate: JRPtr,
+  per_certificate_fee: JRPtr
 ) -> jobject {
   handle_exception_result(|| {
     let constant = constant.rptr(&env)?;
     let coefficient = coefficient.rptr(&env)?;
     let certificate = certificate.rptr(&env)?;
+    let per_certificate_fee = per_certificate_fee.rptr(&env)?;
     constant
       .typed_ref::<Value>()
       .zip(coefficient.typed_ref::<Value>())
       .zip(certificate.typed_ref::<Value>())
-      .map(|((constant, coefficient), certificate)| {
-        Fee::linear_fee(constant, coefficient, certificate)
+      .zip(per_certificate_fee.typed_ref::<PerCertificateFee>())
+      .map(|(((constant, coefficient), certificate), per_certificate_fee)| {
+        Fee::linear_fee(constant, coefficient, certificate, per_certificate_fee)
       })
       .and_then(|fee| fee.rptr().jptr(&env))
   })
