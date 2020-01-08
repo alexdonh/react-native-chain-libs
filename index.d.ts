@@ -62,13 +62,13 @@ export class AccountAddress extends Ptr { }
 */
 export class Address extends Ptr {
   /**
-  * @param {Uint8Array} bytes 
-  * @returns {Promise<Address>} 
+  * @param {Uint8Array} bytes
+  * @returns {Promise<Address>}
   */
   static from_bytes(bytes: Uint8Array): Promise<Address>;
 
   /**
-  * @returns {Promise<Uint8Array>} 
+  * @returns {Promise<Uint8Array>}
   */
   as_bytes(): Promise<Uint8Array>;
 
@@ -131,27 +131,27 @@ export class Address extends Ptr {
   static account_from_public_key(key: PublicKey, discrimination: AddressDiscrimination): Promise<Address>;
 
   /**
-  * @returns {Promise<AddressDiscrimination>} 
+  * @returns {Promise<AddressDiscrimination>}
   */
   get_discrimination(): Promise<AddressDiscrimination>;
 
   /**
-  * @returns {Promise<AddressKind>} 
+  * @returns {Promise<AddressKind>}
   */
   get_kind(): Promise<AddressKind>;
 
   /**
-  * @returns {Promise<Optional<SingleAddress>>} 
+  * @returns {Promise<Optional<SingleAddress>>}
   */
   to_single_address(): Promise<Optional<SingleAddress>>;
 
   /**
-  * @returns {Promise<Option<GroupAddress>>} 
+  * @returns {Promise<Option<GroupAddress>>}
   */
   to_group_address(): Promise<Optional<GroupAddress>>;
 
   /**
-  * @returns {Promise<Optional<AccountAddress>>} 
+  * @returns {Promise<Optional<AccountAddress>>}
   */
   to_account_address(): Promise<Optional<AccountAddress>>;
 }
@@ -177,8 +177,8 @@ export class Account extends Ptr {
   static from_address(address: Address): Promise<Account>;
 
   /**
-  * @param {PublicKey} key 
-  * @returns {Promise<Account>} 
+  * @param {PublicKey} key
+  * @returns {Promise<Account>}
   */
   static single_from_public_key(key: PublicKey): Promise<Account>;
 }
@@ -187,6 +187,12 @@ export class Account extends Ptr {
 */
 export class Input extends Ptr {
   /**
+  * @param {UtxoPointer} utxo_pointer
+  * @returns {Promise<Input>}
+  */
+  static from_utxo(utxo_pointer: UtxoPointer): Promise<Input>;
+
+  /**
   * @param {Account} account
   * @param {Value} v
   * @returns {Promise<Input>}
@@ -194,7 +200,7 @@ export class Input extends Ptr {
   static from_account(account: Account, v: Value): Promise<Input>;
 
   /**
-  * @returns {Promise<Value>} 
+  * @returns {Promise<Value>}
   */
   value(): Promise<Value>;
 }
@@ -203,7 +209,7 @@ export class Input extends Ptr {
 */
 export class Inputs extends Ptr {
   /**
-  * @returns {Promise<Inputs>} 
+  * @returns {Promise<Inputs>}
   */
   static new(): Promise<Inputs>;
 
@@ -219,7 +225,7 @@ export class Inputs extends Ptr {
   get(index: number): Promise<Input>;
 
   /**
-  * @param {Input} item 
+  * @param {Input} item
   */
   add(item: Input): Promise<void>;
 }
@@ -243,7 +249,7 @@ export class Output extends Ptr {
 */
 export class Outputs extends Ptr {
   /**
-  * @returns {Promise<Outputs>} 
+  * @returns {Promise<Outputs>}
   */
   static new(): Promise<Outputs>;
 
@@ -259,7 +265,7 @@ export class Outputs extends Ptr {
   get(index: number): Promise<Output>;
 
   /**
-  * @param {Output} item 
+  * @param {Output} item
   * @returns {Promise<void>}
   */
   add(item: Output): Promise<void>;
@@ -373,6 +379,12 @@ export class FragmentId extends Ptr {
   * @returns {Promise<Uint8Array>}
   */
   as_bytes(): Promise<Uint8Array>;
+
+  /**
+   * @param {Uint8Array} bytes
+   * @returns {Promise<FragmentId>}
+   */
+   static from_bytes(bytes: Uint8Array): Promise<FragmentId>;
 }
 
 /**
@@ -384,10 +396,10 @@ export class FragmentId extends Ptr {
 */
 export class UtxoPointer extends Ptr {
   /**
-  * @param {FragmentId} fragment_id 
-  * @param {number} output_index 
-  * @param {Value} value 
-  * @returns {Promise<UtxoPointer>} 
+  * @param {FragmentId} fragment_id
+  * @param {number} output_index
+  * @param {Value} value
+  * @returns {Promise<UtxoPointer>}
   */
   static new(fragment_id: FragmentId, output_index: number, value: Value): Promise<UtxoPointer>;
 }
@@ -524,8 +536,8 @@ export class PrivateKey extends Ptr {
   to_public(): Promise<PublicKey>;
 
   /**
-  * @param {Uint8Array} bytes 
-  * @returns {Promise<PrivateKey>} 
+  * @param {Uint8Array} bytes
+  * @returns {Promise<PrivateKey>}
   */
   static from_extended_bytes(bytes: Uint8Array): Promise<PrivateKey>;
 }
@@ -560,8 +572,8 @@ export class SpendingCounter extends Ptr {
   static zero(): Promise<SpendingCounter>;
 
   /**
-  * @param {number} counter 
-  * @returns {Promise<SpendingCounter>} 
+  * @param {number} counter
+  * @returns {Promise<SpendingCounter>}
   */
   static from_u32(counter: number): Promise<SpendingCounter>;
 }
@@ -571,23 +583,23 @@ export class SpendingCounter extends Ptr {
 */
 export class Balance extends Ptr {
   /**
-  * @returns {Promise<boolean>} 
+  * @returns {Promise<boolean>}
   */
   is_positive(): Promise<boolean>;
 
   /**
-  * @returns {Promise<boolean>} 
+  * @returns {Promise<boolean>}
   */
   is_negative(): Promise<boolean>;
 
   /**
-  * @returns {Promise<boolean>} 
+  * @returns {Promise<boolean>}
   */
   is_zero(): Promise<boolean>;
 
   /**
   * Get value without taking into account if the balance is positive or negative
-  * @returns {Promise<Value>} 
+  * @returns {Promise<Value>}
   */
   get_value(): Promise<Value>;
 }
@@ -637,10 +649,10 @@ export class Value extends Ptr {
 export class Witness extends Ptr {
   /**
   * Generate Witness for an utxo-based transaction Input
-  * @param {Hash} genesis_hash 
-  * @param {TransactionSignDataHash} transaction_id 
-  * @param {PrivateKey} secret_key 
-  * @returns {Promise<Witness>} 
+  * @param {Hash} genesis_hash
+  * @param {TransactionSignDataHash} transaction_id
+  * @param {PrivateKey} secret_key
+  * @returns {Promise<Witness>}
   */
   static for_utxo(genesis_hash: Hash, transaction_id: TransactionSignDataHash, secret_key: PrivateKey): Promise<Witness>;
 
@@ -657,10 +669,10 @@ export class Witness extends Ptr {
 
   /**
   * Generate Witness for an utxo-based transaction Input
-  * @param {Hash} genesis_hash 
-  * @param {TransactionSignDataHash} transaction_id 
-  * @param {Bip32PrivateKey} secret_key 
-  * @returns {Promise<Witness>} 
+  * @param {Hash} genesis_hash
+  * @param {TransactionSignDataHash} transaction_id
+  * @param {Bip32PrivateKey} secret_key
+  * @returns {Promise<Witness>}
   */
   static for_legacy_icarus_utxo(genesis_hash: Hash, transaction_id: TransactionSignDataHash, secret_key: Bip32PrivateKey): Promise<Witness>;
 }
@@ -669,23 +681,23 @@ export class Witness extends Ptr {
 */
 export class Witnesses extends Ptr {
   /**
-  * @returns {Promise<Witnesses>} 
+  * @returns {Promise<Witnesses>}
   */
   static new(): Promise<Witnesses>;
 
   /**
-  * @returns {Promise<number>} 
+  * @returns {Promise<number>}
   */
   size(): Promise<number>;
 
   /**
-  * @param {number} index 
-  * @returns {Promise<Witness>} 
+  * @param {number} index
+  * @returns {Promise<Witness>}
   */
   get(index: number): Promise<Witness>;
 
   /**
-  * @param {Witness} item 
+  * @param {Witness} item
   * @returns {Promise<void>}
   */
   add(item: Witness): Promise<void>;
@@ -695,7 +707,7 @@ export class Witnesses extends Ptr {
 */
 export class PayloadAuthData extends Ptr {
   /**
-  * @returns {Promise<PayloadAuthData>} 
+  * @returns {Promise<PayloadAuthData>}
   */
   static for_no_payload(): Promise<PayloadAuthData>;
 }
@@ -709,14 +721,14 @@ export class TransactionBindingAuthData extends Ptr {
 */
 export class TransactionBuilderSetAuthData extends Ptr {
   /**
-  * @returns {Promise<TransactionBindingAuthData>} 
+  * @returns {Promise<TransactionBindingAuthData>}
   */
   get_auth_data(): Promise<TransactionBindingAuthData>;
 
   /**
   * Set the authenticated data
-  * @param {PayloadAuthData} auth 
-  * @returns {Promise<Transaction>} 
+  * @param {PayloadAuthData} auth
+  * @returns {Promise<Transaction>}
   */
   set_payload_auth(auth: PayloadAuthData): Promise<Transaction>;
 }
@@ -725,13 +737,13 @@ export class TransactionBuilderSetAuthData extends Ptr {
 */
 export class TransactionBuilderSetWitness extends Ptr {
   /**
-  * @returns {Promise<TransactionSignDataHash>} 
+  * @returns {Promise<TransactionSignDataHash>}
   */
   get_auth_data_for_witness(): Promise<TransactionSignDataHash>;
 
   /**
-  * @param {Witnesses} witnesses 
-  * @returns {Promise<TransactionBuilderSetAuthData>} 
+  * @param {Witnesses} witnesses
+  * @returns {Promise<TransactionBuilderSetAuthData>}
   */
   set_witnesses(witnesses: Witnesses): Promise<TransactionBuilderSetAuthData>;
 }
@@ -740,9 +752,9 @@ export class TransactionBuilderSetWitness extends Ptr {
 */
 export class TransactionBuilderSetIOs extends Ptr {
   /**
-  * @param {Inputs} inputs 
-  * @param {Outputs} outputs 
-  * @returns {Promise<TransactionBuilderSetWitness>} 
+  * @param {Inputs} inputs
+  * @param {Outputs} outputs
+  * @returns {Promise<TransactionBuilderSetWitness>}
   */
   set_ios(inputs: Inputs, outputs: Outputs): Promise<TransactionBuilderSetWitness>;
 }
@@ -790,13 +802,13 @@ export class TransactionBuilder extends Ptr {
   static new(): Promise<TransactionBuilder>;
 
   /**
-  * @param {Certificate} cert 
-  * @returns {Promise<TransactionBuilderSetIOs>} 
+  * @param {Certificate} cert
+  * @returns {Promise<TransactionBuilderSetIOs>}
   */
   payload(cert: Certificate): Promise<TransactionBuilderSetIOs>;
 
   /**
-  * @returns {Promise<TransactionBuilderSetIOs>} 
+  * @returns {Promise<TransactionBuilderSetIOs>}
   */
   no_payload(): Promise<TransactionBuilderSetIOs>;
 }
@@ -805,7 +817,7 @@ export class TransactionBuilder extends Ptr {
 */
 export class Payload extends Ptr {
   /**
-  * @returns {Promise<Payload>} 
+  * @returns {Promise<Payload>}
   */
   static no_payload(): Promise<Payload>;
 }
@@ -814,12 +826,12 @@ export class Payload extends Ptr {
 */
 export class InputOutput extends Ptr {
   /**
-  * @returns {Promise<Inputs>} 
+  * @returns {Promise<Inputs>}
   */
   inputs(): Promise<Inputs>;
 
   /**
-  * @returns {Promise<Outputs>} 
+  * @returns {Promise<Outputs>}
   */
   outputs(): Promise<Outputs>;
 }
@@ -828,44 +840,51 @@ export class InputOutput extends Ptr {
 */
 export class InputOutputBuilder extends Ptr {
   /**
-  * @returns {Promise<InputOutputBuilder>} 
+  * @returns {Promise<InputOutputBuilder>}
   */
   static empty(): Promise<InputOutputBuilder>;
 
   /**
   * Add input to the IO Builder
-  * @param {Input} input 
+  * @param {Input} input
   * @returns {Promise<void>}
   */
   add_input(input: Input): Promise<void>;
 
   /**
   * Add output to the IO Builder
-  * @param {Address} address 
-  * @param {Value} value 
+  * @param {Address} address
+  * @param {Value} value
   * @returns {Promise<void>}
   */
   add_output(address: Address, value: Value): Promise<void>;
 
   /**
   * Estimate fee with the currently added inputs, outputs and certificate based on the given algorithm
-  * @param {Fee} fee 
-  * @param {Payload} payload 
-  * @returns {Promise<Value>} 
+  * @param {Fee} fee
+  * @param {Payload} payload
+  * @returns {Promise<Value>}
   */
   estimate_fee(fee: Fee, payload: Payload): Promise<Value>;
 
   /**
-  * @returns {Promise<InputOutput>} 
+  * @param {Payload} payload
+  * @param {Fee} fee_algorithm
+  * @returns {Promise<Balance>}
+  */
+  get_balance(payload: Payload, fee_algorithm: Fee): Promise<Balance>;
+
+  /**
+  * @returns {Promise<InputOutput>}
   */
   build(): Promise<InputOutput>;
 
   /**
   * Seal the transaction by passing fee rule and the output policy
-  * @param {Payload} payload 
-  * @param {Fee} fee_algorithm 
-  * @param {OutputPolicy} policy 
-  * @returns {Promise<InputOutput>} 
+  * @param {Payload} payload
+  * @param {Fee} fee_algorithm
+  * @param {OutputPolicy} policy
+  * @returns {Promise<InputOutput>}
   */
   seal_with_output_policy(payload: Payload, fee_algorithm: Fee, policy: OutputPolicy): Promise<InputOutput>;
 }
@@ -874,8 +893,8 @@ export class InputOutputBuilder extends Ptr {
 */
 export class StakeDelegationAuthData extends Ptr {
   /**
-  * @param {AccountBindingSignature} signature 
-  * @returns {Promise<StakeDelegationAuthData>} 
+  * @param {AccountBindingSignature} signature
+  * @returns {Promise<StakeDelegationAuthData>}
   */
   static new(signature: AccountBindingSignature): Promise<StakeDelegationAuthData>;
 }
@@ -907,29 +926,29 @@ export class DelegationRatio extends Ptr { }
 */
 export class DelegationType extends Ptr {
   /**
-  * @returns {Promise<DelegationType>} 
+  * @returns {Promise<DelegationType>}
   */
   static non_delegated(): Promise<DelegationType>;
 
   /**
-  * @param {PoolId} pool_id 
-  * @returns {Promise<DelegationType>} 
+  * @param {PoolId} pool_id
+  * @returns {Promise<DelegationType>}
   */
   static full(pool_id: PoolId): Promise<DelegationType>;
 
   /**
-  * @param {DelegationRatio} r 
-  * @returns {Promise<DelegationType>} 
+  * @param {DelegationRatio} r
+  * @returns {Promise<DelegationType>}
   */
   static ratio(r: DelegationRatio): Promise<DelegationType>;
 
   /**
-  * @returns {Promise<number>} 
+  * @returns {Promise<number>}
   */
   get_kind(): Promise<number>;
 
   /**
-  * @returns {Promise<Optional<PoolId>>} 
+  * @returns {Promise<Optional<PoolId>>}
   */
   get_full(): Promise<Optional<PoolId>>;
 }
@@ -943,30 +962,30 @@ export class AccountIdentifier extends Ptr { }
 export class StakeDelegation extends Ptr {
   /**
   * Create a stake delegation object from account (stake key) to pool_id
-  * @param {DelegationType} delegation_type 
-  * @param {PublicKey} account 
-  * @returns {Promise<StakeDelegation>} 
+  * @param {DelegationType} delegation_type
+  * @param {PublicKey} account
+  * @returns {Promise<StakeDelegation>}
   */
   static new(delegation_type: DelegationType, account: PublicKey): Promise<StakeDelegation>;
 
   /**
-  * @returns {Promise<DelegationType>} 
+  * @returns {Promise<DelegationType>}
   */
   delegation_type(): Promise<DelegationType>;
 
   /**
-  * @returns {Promise<AccountIdentifier>} 
+  * @returns {Promise<AccountIdentifier>}
   */
   account(): Promise<AccountIdentifier>;
 
   /**
-  * @returns {Promise<Uint8Array>} 
+  * @returns {Promise<Uint8Array>}
   */
   as_bytes(): Promise<Uint8Array>;
 
   /**
-  * @param {Uint8Array} bytes 
-  * @returns {Promise<StakeDelegation>} 
+  * @param {Uint8Array} bytes
+  * @returns {Promise<StakeDelegation>}
   */
   static from_bytes(bytes: Uint8Array): Promise<StakeDelegation>;
 }
@@ -988,47 +1007,47 @@ export class OwnerStakeDelegation extends Ptr { }
 export class Certificate extends Ptr {
   /**
   * Create a Certificate for StakeDelegation
-  * @param {StakeDelegation} stake_delegation 
-  * @returns {Promise<Certificate>} 
+  * @param {StakeDelegation} stake_delegation
+  * @returns {Promise<Certificate>}
   */
   static stake_delegation(stake_delegation: StakeDelegation): Promise<Certificate>;
 
   /**
   * Create a Certificate for PoolRegistration
-  * @param {PoolRegistration} pool_registration 
-  * @returns {Promise<Certificate>} 
+  * @param {PoolRegistration} pool_registration
+  * @returns {Promise<Certificate>}
   */
   static stake_pool_registration(pool_registration: PoolRegistration): Promise<Certificate>;
 
   /**
   * Create a Certificate for PoolRetirement
-  * @param {PoolRetirement} pool_retirement 
-  * @returns {Promise<Certificate>} 
+  * @param {PoolRetirement} pool_retirement
+  * @returns {Promise<Certificate>}
   */
   static stake_pool_retirement(pool_retirement: PoolRetirement): Promise<Certificate>;
 
   /**
-  * @returns {Promise<CertificateKind>} 
+  * @returns {Promise<CertificateKind>}
   */
   get_type(): Promise<CertificateKind>;
 
   /**
-  * @returns {Promise<StakeDelegation>} 
+  * @returns {Promise<StakeDelegation>}
   */
   get_stake_delegation(): Promise<StakeDelegation>;
 
   /**
-  * @returns {Promise<OwnerStakeDelegation>} 
+  * @returns {Promise<OwnerStakeDelegation>}
   */
   get_owner_stake_delegation(): Promise<OwnerStakeDelegation>;
 
   /**
-  * @returns {Promise<PoolRegistration>} 
+  * @returns {Promise<PoolRegistration>}
   */
   get_pool_registration(): Promise<PoolRegistration>;
 
   /**
-  * @returns {Promise<PoolRetirement>} 
+  * @returns {Promise<PoolRetirement>}
   */
   get_pool_retirement(): Promise<PoolRetirement>;
 }
@@ -1037,9 +1056,9 @@ export class Certificate extends Ptr {
 */
 export class AccountBindingSignature extends Ptr {
   /**
-  * @param {PrivateKey} private_key 
-  * @param {TransactionBindingAuthData} auth_data 
-  * @returns {Promise<AccountBindingSignature>} 
+  * @param {PrivateKey} private_key
+  * @param {TransactionBindingAuthData} auth_data
+  * @returns {Promise<AccountBindingSignature>}
   */
   static new_single(private_key: PrivateKey, auth_data: TransactionBindingAuthData): Promise<AccountBindingSignature>;
 }
@@ -1066,52 +1085,52 @@ export class Bip32PrivateKey extends Ptr {
   *
   * This is why deriving the private key should not fail while deriving
   * the public key may fail (if the derivation index is invalid).
-  * @param {number} index 
-  * @returns {Promise<Bip32PrivateKey>} 
+  * @param {number} index
+  * @returns {Promise<Bip32PrivateKey>}
   */
   derive(index: number): Promise<Bip32PrivateKey>;
 
   /**
-  * @returns {Promise<Bip32PrivateKey>} 
+  * @returns {Promise<Bip32PrivateKey>}
   */
   static generate_ed25519_bip32(): Promise<Bip32PrivateKey>;
 
   /**
-  * @returns {Promise<PrivateKey>} 
+  * @returns {Promise<PrivateKey>}
   */
   to_raw_key(): Promise<PrivateKey>;
 
   /**
-  * @returns {Promise<Bip32PublicKey>} 
+  * @returns {Promise<Bip32PublicKey>}
   */
   to_public(): Promise<Bip32PublicKey>;
 
   /**
-  * @param {Uint8Array} bytes 
-  * @returns {Promise<Bip32PrivateKey>} 
+  * @param {Uint8Array} bytes
+  * @returns {Promise<Bip32PrivateKey>}
   */
   static from_bytes(bytes: Uint8Array): Promise<Bip32PrivateKey>;
 
   /**
-  * @returns {Promise<Uint8Array>} 
+  * @returns {Promise<Uint8Array>}
   */
   as_bytes(): Promise<Uint8Array>;
 
   /**
-  * @param {string} bech32_str 
-  * @returns {Promise<Bip32PrivateKey>} 
+  * @param {string} bech32_str
+  * @returns {Promise<Bip32PrivateKey>}
   */
   static from_bech32(bech32_str: string): Promise<Bip32PrivateKey>;
 
   /**
-  * @returns {Promise<string>} 
+  * @returns {Promise<string>}
   */
   to_bech32(): Promise<string>;
 
   /**
-  * @param {Uint8Array} entropy 
-  * @param {Uint8Array} password 
-  * @returns {Promise<Bip32PrivateKey>} 
+  * @param {Uint8Array} entropy
+  * @param {Uint8Array} password
+  * @returns {Promise<Bip32PrivateKey>}
   */
   static from_bip39_entropy(entropy: Uint8Array, password: Uint8Array): Promise<Bip32PrivateKey>;
 }
@@ -1138,35 +1157,35 @@ export class Bip32PublicKey extends Ptr {
   *
   * This is why deriving the private key should not fail while deriving
   * the public key may fail (if the derivation index is invalid).
-  * @param {number} index 
-  * @returns {Promise<Bip32PublicKey>} 
+  * @param {number} index
+  * @returns {Promise<Bip32PublicKey>}
   */
   derive(index: number): Promise<Bip32PublicKey>;
 
   /**
-  * @returns {Promise<PublicKey>} 
+  * @returns {Promise<PublicKey>}
   */
   to_raw_key(): Promise<PublicKey>;
 
   /**
-  * @param {Uint8Array} bytes 
-  * @returns {Promise<Bip32PublicKey>} 
+  * @param {Uint8Array} bytes
+  * @returns {Promise<Bip32PublicKey>}
   */
   static from_bytes(bytes: Uint8Array): Promise<Bip32PublicKey>;
 
   /**
-  * @returns {Promise<Uint8Array>} 
+  * @returns {Promise<Uint8Array>}
   */
   as_bytes(): Promise<Uint8Array>;
 
   /**
-  * @param {string} bech32_str 
-  * @returns {Promise<Bip32PublicKey>} 
+  * @param {string} bech32_str
+  * @returns {Promise<Bip32PublicKey>}
   */
   static from_bech32(bech32_str: string): Promise<Bip32PublicKey>;
 
   /**
-  * @returns {Promise<string>} 
+  * @returns {Promise<string>}
   */
   to_bech32(): Promise<string>;
 }

@@ -505,6 +505,17 @@ RCT_EXPORT_METHOD(accountSingleFromPublicKey:(nonnull NSString *)keyPtr  withRes
     }] exec:keyPtr andResolve:resolve orReject:reject];
 }
 
+RCT_EXPORT_METHOD(inputFromUtxo:(nonnull NSString *)utxoPtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSString* utxoPtr, CharPtr* error) {
+        RPtr result;
+        RPtr utxo_pointer = [utxoPtr rPtr];
+        return input_from_utxo(utxo_pointer, &result, error)
+            ? [NSString stringFromPtr:result]
+            : nil;
+    }] exec:utxo_pointer andResolve:resolve orReject:reject];
+}
+
 RCT_EXPORT_METHOD(inputFromAccount:(nonnull NSString *)account withV:(nonnull NSString *)v withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
 {
     [[CSafeOperation new:^NSString*(NSArray* params, CharPtr* error) {
@@ -849,6 +860,17 @@ RCT_EXPORT_METHOD(fragmentIdAsBytes:(nonnull NSString *)fragmentIdPtr withResolv
     }] exec:fragmentIdPtr andResolve:resolve orReject:reject];
 }
 
+RCT_EXPORT_METHOD(fragmentIdFromBytes:(nonnull NSString *)bytesStr  withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+ {
+     [[CSafeOperation new:^NSString*(NSString* bytesStr, CharPtr* error) {
+         RPtr result;
+         NSData* data = [NSData fromBase64:bytesStr];
+         return fragment_id_from_bytes((uint8_t*)data.bytes, data.length, &result, error)
+             ? [NSString stringFromPtr:result]
+             : nil;
+     }] exec:bytesStr andResolve:resolve orReject:reject];
+ }
+
 RCT_EXPORT_METHOD(transactionSignDataHashFromBytes:(nonnull NSString *)bytesStr  withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
 {
     [[CSafeOperation new:^NSString*(NSString* bytesStr, CharPtr* error) {
@@ -980,6 +1002,19 @@ RCT_EXPORT_METHOD(inputOutputBuilderEstimateFee:(nonnull NSString *)ioBuilderPtr
             ? [NSString stringFromPtr:result]
             : nil;
     }] exec:@[ioBuilderPtr, feePtr, payloadPtr] andResolve:resolve orReject:reject];
+}
+
+RCT_EXPORT_METHOD(inputOutputBuilderGetBalance:(nonnull NSString *)ioBuilderPtr withPayload:(nonnull NSString *)payloadPtr withFee:(nonnull NSString *)feePtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSArray* params, CharPtr* error) {
+        RPtr result;
+        RPtr ioBuilder = [[params objectAtIndex:0] rPtr];
+        RPtr payload = [[params objectAtIndex:1] rPtr];
+        RPtr fee = [[params objectAtIndex:2] rPtr];
+        return input_output_builder_get_balance(ioBuilder, payload, fee, &result, error)
+            ? [NSString stringFromPtr:result]
+            : nil;
+    }] exec:@[ioBuilderPtr, payloadPtr, feePtr] andResolve:resolve orReject:reject];
 }
 
 RCT_EXPORT_METHOD(inputOutputBuilderBuild:(nonnull NSString *)ioBuilderPtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)

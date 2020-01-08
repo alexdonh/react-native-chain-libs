@@ -371,6 +371,14 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
     // Input
 
     @ReactMethod
+    public final void inputFromUtxo(String utxoPointer, Promise promise) {
+        Native.I
+                .inputFromUtxo(new RPtr(utxoPointer))
+                .map(RPtr::toJs)
+                .pour(promise);
+    }
+
+    @ReactMethod
     public final void inputFromAccount(String account, String v, Promise promise) {
         Native.I
                 .inputFromAccount(new RPtr(account), new RPtr(v))
@@ -630,6 +638,14 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
                 .pour(promise);
     }
 
+    @ReactMethod
+     public final void fragmentIdFromBytes(String bytes, Promise promise) {
+         Native.I
+                 .fragmentIdFromBytes(Base64.decode(bytes, Base64.DEFAULT))
+                 .map(RPtr::toJs)
+                 .pour(promise);
+     }
+
     // TransactionSignDataHash
 
     @ReactMethod
@@ -725,6 +741,14 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
     public final void inputOutputBuilderEstimateFee(String ioBuilder, String fee, String payload, Promise promise) {
         Native.I
                 .inputOutputBuilderEstimateFee(new RPtr(ioBuilder), new RPtr(fee), new RPtr(payload))
+                .map(RPtr::toJs)
+                .pour(promise);
+    }
+
+    @ReactMethod
+    public final void inputOutputBuilderGetBalance(String ioBuilder, String payload, String fee, Promise promise) {
+        Native.I
+                .inputOutputBuilderGetBalance(new RPtr(ioBuilder), new RPtr(payload), new RPtr(fee))
                 .map(RPtr::toJs)
                 .pour(promise);
     }

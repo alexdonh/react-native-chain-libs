@@ -2,7 +2,20 @@ use super::result::CResult;
 use super::string::CharPtr;
 use crate::panic::{handle_exception, handle_exception_result, Zip};
 use crate::ptr::{RPtr, RPtrRepresentable};
-use js_chain_libs::{Account, Input, Inputs, Value};
+use js_chain_libs::{UtxoPointer, Account, Input, Inputs, Value};
+
+#[no_mangle]
+pub unsafe extern "C" fn input_from_utxo(
+  utxo_pointer: RPtr, result: &mut RPtr, error: &mut CharPtr
+) -> bool {
+  handle_exception_result(|| {
+    utxo_pointer
+      .typed_ref::<UtxoPointer>()
+      .map(|utxo_ptr| Input::from_utxo(utxo_ptr))
+  })
+  .map(|input| input.rptr())
+  .response(result, error)
+}
 
 #[no_mangle]
 pub unsafe extern "C" fn input_from_account(

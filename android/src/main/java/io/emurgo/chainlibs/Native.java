@@ -81,6 +81,7 @@ final class Native {
     public final native Result<RPtr> accountSingleFromPublicKey(RPtr key);
 
     // Input
+    public final native Result<RPtr> inputFromUtxo(RPtr utxoPointer);
     public final native Result<RPtr> inputFromAccount(RPtr account, RPtr v);
     public final native Result<RPtr> inputValue(RPtr input);
 
@@ -133,6 +134,7 @@ final class Native {
     // FragmentId
     public final native Result<RPtr> fragmentIdCalculate(byte[] bytes);
     public final native Result<byte[]> fragmentIdAsBytes(RPtr fragmentId);
+    public final native Result<RPtr> fragmentIdFromBytes(byte[] bytes);
 
     // TransactionSignDataHash
     public final native Result<RPtr> transactionSignDataHashFromBytes(byte[] bytes);
@@ -153,6 +155,7 @@ final class Native {
     public final native Result<Void> inputOutputBuilderAddInput(RPtr ioBuilder, RPtr input);
     public final native Result<Void> inputOutputBuilderAddOutput(RPtr ioBuilder, RPtr address, RPtr value);
     public final native Result<RPtr> inputOutputBuilderEstimateFee(RPtr ioBuilder, RPtr fee, RPtr payload);
+    public final native Result<RPtr> inputOutputBuilderGetBalance(RPtr ioBuilder, RPtr payload, RPtr fee);
     public final native Result<RPtr> inputOutputBuilderBuild(RPtr ioBuilder);
     public final native Result<RPtr> inputOutputBuilderSealWithOutputPolicy(RPtr ioBuilder, RPtr payload, RPtr feeAlgorithm, RPtr policy);
 

@@ -61,7 +61,7 @@ pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_addressFromBytes(
     env
       .convert_byte_array(bytes)
       .into_result()
-      .and_then(|bytes| Address::from_bytes((&bytes[..]).into()).into_result())
+      .and_then(|bytes| Address::from_bytes(&bytes).into_result())
       .and_then(|address| address.rptr().jptr(&env))
   })
   .jresult(&env)

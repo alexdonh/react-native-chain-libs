@@ -309,6 +309,16 @@ export class Account extends Ptr {
 /**
 */
 export class Input extends Ptr {
+  /**
+  * @param {UtxoPointer} utxo_pointer
+  * @returns {Promise<Input>}
+  */
+  static async from_utxo(utxo_pointer) {
+      const utxoPtr = Ptr._assertClass(utxo_pointer, UtxoPointer);
+      const ret = await ChainLibs.inputFromUtxo(utxoPtr);
+      return Ptr._wrap(ret, Input);
+  }
+
     /**
     * @param {Account} account
     * @param {Value} v
@@ -507,6 +517,15 @@ export class FragmentId extends Ptr {
     async as_bytes() {
         const b64 = await ChainLibs.fragmentIdAsBytes(this.ptr);
         return Uint8ArrayFromB64(b64);
+    }
+
+    /**
+     * @param {Uint8Array} bytes
+     * @returns {Promise<FragmentId>}
+     */
+     static async from_bytes(bytes) {
+         const ret = await ChainLibs.fragmentIdFromBytes(b64FromUint8Array(bytes));
+         return Ptr._wrap(ret, FragmentId);
     }
 }
 
@@ -1338,6 +1357,18 @@ export class InputOutputBuilder extends Ptr {
         const payloadPtr = Ptr._assertClass(payload, Payload);
         const ret = await ChainLibs.inputOutputBuilderEstimateFee(this.ptr, feePtr, payloadPtr);
         return Ptr._wrap(ret, Value);
+    }
+
+    /**
+    * @param {Payload} payload
+    * @param {Fee} feeAlgorithm
+    * @returns {Balance}
+    */
+    async get_balance(payload, feeAlgorithm) {
+        const payloadPtr = Ptr._assertClass(payload, Payload);
+        const feePtr = Ptr._assertClass(feeAlgorithm, Fee);
+        const ret = await ChainLibs.inputOutputBuilderGetBalance(this.ptr, payloadPtr, feePtr);
+        return Ptr._wrap(ret, Balance);
     }
 
     /**
