@@ -154,6 +154,7 @@ final class Native {
     public final native Result<Void> inputOutputBuilderAddInput(RPtr ioBuilder, RPtr input);
     public final native Result<Void> inputOutputBuilderAddOutput(RPtr ioBuilder, RPtr address, RPtr value);
     public final native Result<RPtr> inputOutputBuilderEstimateFee(RPtr ioBuilder, RPtr fee, RPtr payload);
+    public final native Result<RPtr> inputOutputBuilderGetBalance(RPtr ioBuilder, RPtr payload, RPtr fee);
     public final native Result<RPtr> inputOutputBuilderBuild(RPtr ioBuilder);
     public final native Result<RPtr> inputOutputBuilderSealWithOutputPolicy(RPtr ioBuilder, RPtr payload, RPtr feeAlgorithm, RPtr policy);
 

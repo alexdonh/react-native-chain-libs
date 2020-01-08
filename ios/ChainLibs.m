@@ -992,6 +992,19 @@ RCT_EXPORT_METHOD(inputOutputBuilderEstimateFee:(nonnull NSString *)ioBuilderPtr
     }] exec:@[ioBuilderPtr, feePtr, payloadPtr] andResolve:resolve orReject:reject];
 }
 
+RCT_EXPORT_METHOD(inputOutputBuilderGetBalance:(nonnull NSString *)ioBuilderPtr withPayload:(nonnull NSString *)payloadPtr withFee:(nonnull NSString *)feePtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSArray* params, CharPtr* error) {
+        RPtr result;
+        RPtr ioBuilder = [[params objectAtIndex:0] rPtr];
+        RPtr payload = [[params objectAtIndex:1] rPtr];
+        RPtr fee = [[params objectAtIndex:2] rPtr];
+        return input_output_builder_get_balance(ioBuilder, payload, fee, &result, error)
+            ? [NSString stringFromPtr:result]
+            : nil;
+    }] exec:@[ioBuilderPtr, payloadPtr, feePtr] andResolve:resolve orReject:reject];
+}
+
 RCT_EXPORT_METHOD(inputOutputBuilderBuild:(nonnull NSString *)ioBuilderPtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
 {
     [[CSafeOperation new:^NSString*(NSString* ioBuilderPtr, CharPtr* error) {

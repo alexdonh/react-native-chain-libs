@@ -55,6 +55,25 @@ pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_inputOutputBuilderAddOu
 
 #[allow(non_snake_case)]
 #[no_mangle]
+pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_inputOutputBuilderGetBalance(
+  env: JNIEnv, _: JObject, io_builder: JRPtr, payload: JRPtr, fee: JRPtr
+) -> jobject {
+  handle_exception_result(|| {
+    let io_builder = io_builder.rptr(&env)?;
+    let payload = payload.rptr(&env)?;
+    let fee = fee.rptr(&env)?;
+    io_builder
+      .typed_ref::<InputOutputBuilder>()
+      .zip(payload.typed_ref::<Payload>())
+      .zip(fee.typed_ref::<Fee>())
+      .map(|((io_builder, payload), fee)| io_builder.get_balance(payload, fee).into_result())
+      .and_then(|balance| balance.rptr().jptr(&env))
+  })
+  .jresult(&env)
+}
+
+#[allow(non_snake_case)]
+#[no_mangle]
 pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_inputOutputBuilderEstimateFee(
   env: JNIEnv, _: JObject, io_builder: JRPtr, fee: JRPtr, payload: JRPtr
 ) -> jobject {
