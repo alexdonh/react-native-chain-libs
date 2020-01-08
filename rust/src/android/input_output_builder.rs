@@ -66,7 +66,7 @@ pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_inputOutputBuilderGetBa
       .typed_ref::<InputOutputBuilder>()
       .zip(payload.typed_ref::<Payload>())
       .zip(fee.typed_ref::<Fee>())
-      .map(|((io_builder, payload), fee)| io_builder.get_balance(payload, fee).into_result())
+      .and_then(|((io_builder, payload), fee)| io_builder.get_balance(payload, fee).into_result())
       .and_then(|balance| balance.rptr().jptr(&env))
   })
   .jresult(&env)

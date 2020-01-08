@@ -49,7 +49,7 @@ pub unsafe extern "C" fn input_output_builder_get_balance(
       .typed_ref::<InputOutputBuilder>()
       .zip(payload.typed_ref::<Payload>())
       .zip(fee.typed_ref::<Fee>())
-      .map(|((io_builder, payload), fee)| io_builder.get_balance(payload, fee).into_result())
+      .and_then(|((io_builder, payload), fee)| io_builder.get_balance(payload, fee).into_result())
   })
   .map(|balance| balance.rptr())
   .response(result, error)
