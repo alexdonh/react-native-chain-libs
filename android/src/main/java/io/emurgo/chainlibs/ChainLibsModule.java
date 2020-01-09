@@ -582,7 +582,7 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public final void outputValue(String output, Promise promise) {
         Native.I
-                .outputAddress(new RPtr(output))
+                .outputValue(new RPtr(output))
                 .map(RPtr::toJs)
                 .pour(promise);
     }
