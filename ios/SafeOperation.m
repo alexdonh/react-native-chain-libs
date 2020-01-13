@@ -12,14 +12,20 @@
 @implementation BaseSafeOperation
 
 - (void)exec:(_Nullable id)param andResolve:(RCTPromiseResolveBlock)resolve orReject:(RCTPromiseRejectBlock)reject {
-    NSError* error = nil;
-    id result = [self exec:param error:&error];
-    if (error != nil) {
-        reject([NSString stringWithFormat:@"%li", (long)[error code]],
-               [error localizedDescription],
-               error);
-    } else {
-        resolve(result);
+    @try {
+        NSError* error = nil;
+        id result = [self exec:param error:&error];
+        if (error != nil) {
+            reject([NSString stringWithFormat:@"%li", (long)[error code]],
+                   [error localizedDescription],
+                   error);
+        } else {
+            resolve(result);
+        }
+    }
+    @catch (NSException* e) {
+        NSError* error = [NSError errorWithDomain:[e name] code:0 userInfo:[e userInfo]];
+        reject(@"0", [e reason], error);
     }
 }
 
