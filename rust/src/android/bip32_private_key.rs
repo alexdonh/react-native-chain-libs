@@ -17,7 +17,7 @@ pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_bip32PrivateKeyDerive(
 ) -> jobject {
   handle_exception_result(|| {
     let bip_32_private_key = bip_32_private_key.rptr(&env)?;
-    let idx_u32 = u32::try_from(index).unwrap();
+    let idx_u32 = u32::try_from(index).map_err(|err| err.to_string())?;
     bip_32_private_key
       .typed_ref::<Bip32PrivateKey>()
       .map(|bip_32_private_key| bip_32_private_key.derive(idx_u32))
