@@ -199,7 +199,7 @@ final class Native {
     public final native Result<RPtr> accountBindingSignatureNewSingle(RPtr privateKey, RPtr authData);
 
     // Bip32PrivateKey
-    public final native Result<RPtr> bip32PrivateKeyDerive(RPtr bip32PrivateKey, int index);
+    public final native Result<RPtr> bip32PrivateKeyDerive(RPtr bip32PrivateKey, long index);
     public final native Result<RPtr> bip32PrivateKeyGenerateEd25519Bip32();
     public final native Result<RPtr> bip32PrivateKeyToRawKey(RPtr bip32PrivateKey);
     public final native Result<RPtr> bip32PrivateKeyToPublic(RPtr bip32PrivateKey);
@@ -210,7 +210,7 @@ final class Native {
     public final native Result<RPtr> bip32PrivateKeyFromBip39Entropy(byte[] entropy, byte[] password);
 
     // Bip32PublicKey
-    public final native Result<RPtr> bip32PublicKeyDerive(RPtr bip32PublicKey, int index);
+    public final native Result<RPtr> bip32PublicKeyDerive(RPtr bip32PublicKey, long index);
     public final native Result<RPtr> bip32PublicKeyToRawKey(RPtr bip32PublicKey);
     public final native Result<RPtr> bip32PublicKeyFromBytes(byte[] bytes);
     public final native Result<byte[]> bip32PublicKeyAsBytes(RPtr bip32PublicKey);

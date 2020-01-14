@@ -1299,7 +1299,7 @@ RCT_EXPORT_METHOD(bip32PrivateKeyDerive:(nonnull NSString *)bip32PrivateKeyPtr w
     [[CSafeOperation new:^NSString*(NSArray* params, CharPtr* error) {
         RPtr result;
         RPtr bip32PrivateKey = [[params objectAtIndex:0] rPtr];
-        uint32_t index = [[params objectAtIndex:1] intValue];
+        uint32_t index = [[params objectAtIndex:1] uint32Value];
         return bip_32_private_key_derive(bip32PrivateKey, index, &result, error)
             ? [NSString stringFromPtr:result]
             : nil;
@@ -1401,7 +1401,7 @@ RCT_EXPORT_METHOD(bip32PublicKeyDerive:(nonnull NSString *)bip32PublicKeyPtr wit
     [[CSafeOperation new:^NSString*(NSArray* params, CharPtr* error) {
         RPtr result;
         RPtr bip32PublicKey = [[params objectAtIndex:0] rPtr];
-        uint32_t index = [[params objectAtIndex:1] intValue];
+        uint32_t index = [[params objectAtIndex:1] uint32Value];
         return bip32_public_key_derive(bip32PublicKey, index, &result, error)
             ? [NSString stringFromPtr:result]
             : nil;

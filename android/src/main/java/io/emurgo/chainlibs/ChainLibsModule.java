@@ -970,9 +970,9 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
     // Bip32PrivateKey
 
     @ReactMethod
-    public final void bip32PrivateKeyDerive(String bip32PrivateKey, Integer index, Promise promise) {
+    public final void bip32PrivateKeyDerive(String bip32PrivateKey, Double index, Promise promise) {
         Native.I
-                .bip32PrivateKeyDerive(new RPtr(bip32PrivateKey), index)
+                .bip32PrivateKeyDerive(new RPtr(bip32PrivateKey), index.longValue())
                 .map(RPtr::toJs)
                 .pour(promise);
     }
@@ -1043,9 +1043,9 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
     // Bip32PublicKey
 
     @ReactMethod
-    public final void bip32PublicKeyDerive(String bip32PublicKey, Integer index, Promise promise) {
+    public final void bip32PublicKeyDerive(String bip32PublicKey, Double index, Promise promise) {
         Native.I
-                .bip32PublicKeyDerive(new RPtr(bip32PublicKey), index)
+                .bip32PublicKeyDerive(new RPtr(bip32PublicKey), index.longValue())
                 .map(RPtr::toJs)
                 .pour(promise);
     }
