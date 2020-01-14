@@ -5,20 +5,22 @@ use super::string::ToString;
 use crate::panic::{handle_exception_result, ToResult, Zip};
 use crate::ptr::RPtrRepresentable;
 use jni::objects::{JObject, JString};
-use jni::sys::{jbyteArray, jint, jobject};
+use jni::sys::{jbyteArray, jlong, jobject};
 use jni::JNIEnv;
 use js_chain_libs::Bip32PrivateKey;
+use std::convert::TryFrom;
 
 #[allow(non_snake_case)]
 #[no_mangle]
 pub unsafe extern "C" fn Java_io_emurgo_chainlibs_Native_bip32PrivateKeyDerive(
-  env: JNIEnv, _: JObject, bip_32_private_key: JRPtr, index: jint
+  env: JNIEnv, _: JObject, bip_32_private_key: JRPtr, index: jlong
 ) -> jobject {
   handle_exception_result(|| {
     let bip_32_private_key = bip_32_private_key.rptr(&env)?;
+    let idx_u32 = u32::try_from(index).unwrap();
     bip_32_private_key
       .typed_ref::<Bip32PrivateKey>()
-      .map(|bip_32_private_key| bip_32_private_key.derive(index as u32))
+      .map(|bip_32_private_key| bip_32_private_key.derive(idx_u32))
       .and_then(|bip_32_private_key| bip_32_private_key.rptr().jptr(&env))
   })
   .jresult(&env)
