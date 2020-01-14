@@ -6,7 +6,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
 import android.util.Base64;
-import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
