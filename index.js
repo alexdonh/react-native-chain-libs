@@ -1292,6 +1292,15 @@ export class Payload extends Ptr {
         const ret = await ChainLibs.payloadNoPayload();
         return Ptr._wrap(ret, Payload);
     }
+
+    /**
+    * @returns {Promise<Payload>}
+    */
+    static async certificate(certificate) {
+      const certificatePtr = Ptr._assertClass(certificate, Certificate);
+        const ret = await ChainLibs.payloadCertificate(certificatePtr);
+        return Ptr._wrap(ret, Payload);
+    }
 }
 
 /**

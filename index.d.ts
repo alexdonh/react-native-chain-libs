@@ -820,6 +820,11 @@ export class Payload extends Ptr {
   * @returns {Promise<Payload>}
   */
   static no_payload(): Promise<Payload>;
+
+  /**
+  * @returns {Promise<Payload>}
+  */
+  static certificate(certificate: Certificate): Promise<Payload>;
 }
 
 /**

@@ -840,6 +840,14 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
                 .pour(promise);
     }
 
+    @ReactMethod
+    public final void payloadCertificate(Promise promise) {
+        Native.I
+                .payloadCertificate()
+                .map(RPtr::toJs)
+                .pour(promise);
+    }
+
     // StakeDelegationAuthData
 
     @ReactMethod
