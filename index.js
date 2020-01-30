@@ -137,7 +137,15 @@ export class SingleAddress extends Ptr { }
 
 /**
 */
-export class GroupAddress extends Ptr { }
+export class GroupAddress extends Ptr {
+    /**
+    * @returns {Promise<PublicKey>}
+    */
+    async get_account_key() {
+        const ret = await ChainLibs.groupAddressGetAccountKey(this.ptr);
+        return Ptr._wrap(ret, PublicKey);
+    }
+}
 
 /**
 */

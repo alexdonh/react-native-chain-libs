@@ -98,6 +98,17 @@ RCT_EXPORT_METHOD(publicKeyAsBytes:(nonnull NSString *)ptr withResolve:(RCTPromi
     }] exec:ptr andResolve:resolve orReject:reject];
 }
 
+RCT_EXPORT_METHOD(groupAddressGetAccountKey:(nonnull NSString *)groupAddrPtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSString* groupAddrPtr, CharPtr* error) {
+        RPtr result;
+        RPtr groupAddress = [groupAddrPtr rPtr];
+        return group_address_get_account_key(groupAddress, &result, error)
+            ? [NSString stringFromPtr:result]
+            : nil;
+    }] exec:groupAddrPtr andResolve:resolve orReject:reject];
+}
+
 RCT_EXPORT_METHOD(addressFromBytes:(nonnull NSString *)bytesStr  withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
 {
     [[CSafeOperation new:^NSString*(NSString* bytesStr, CharPtr* error) {

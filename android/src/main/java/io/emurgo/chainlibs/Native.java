@@ -30,6 +30,9 @@ final class Native {
     public final native Result<RPtr> publicKeyFromBech32(String bech32);
     public final native Result<byte[]> publicKeyAsBytes(RPtr pubKey);
 
+    // GroupAddress
+    public final native Result<RPtr> groupAddressGetAccountKey(RPtr grpAddr);
+
     // Address
     public final native Result<RPtr> addressFromBytes(byte[] bytes);
     public final native Result<byte[]> addressAsBytes(RPtr address);
