@@ -79,6 +79,15 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
                 .pour(promise);
     }
 
+    // GroupAddress
+    @ReactMethod
+    public final void groupAddressGetAccountKey(String grpAddr, Promise promise) {
+        Native.I
+                .groupAddressGetAccountKey(new RPtr(grpAddr))
+                .map(RPtr::toJs)
+                .pour(promise);
+    }
+
     // Address
 
     @ReactMethod

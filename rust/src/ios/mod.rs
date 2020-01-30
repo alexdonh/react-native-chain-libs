@@ -10,6 +10,7 @@ mod delegation_type;
 mod fee;
 mod fragment;
 mod fragment_id;
+mod group_address;
 mod hash;
 mod input;
 mod input_output;

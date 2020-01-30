@@ -48,7 +48,12 @@ export class SingleAddress extends Ptr { }
 
 /**
 */
-export class GroupAddress extends Ptr { }
+export class GroupAddress extends Ptr {
+  /**
+  * @returns {Promise<PublicKey>}
+  */
+  get_account_key(): Promise<PublicKey>;
+}
 
 /**
 */
