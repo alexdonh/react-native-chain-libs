@@ -1462,6 +1462,16 @@ RCT_EXPORT_METHOD(bip32PublicKeyToBech32:(nonnull NSString *)bip32PublicKeyPtr w
     }] exec:bip32PublicKeyPtr andResolve:resolve orReject:reject];
 }
 
+RCT_EXPORT_METHOD(poolIdFromHex:(nonnull NSString *)hexString withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSString* hexString, CharPtr* error) {
+        RPtr result;
+        return pool_id_from_hex([hexString charPtr], &result, error)
+            ? [NSString stringFromPtr:result]
+            : nil;
+    }] exec:hexString andResolve:resolve orReject:reject];
+}
+
 RCT_EXPORT_METHOD(delegationTypeNonDelegated:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
 {
     [[CSafeOperation new:^NSString*(id _void, CharPtr* error) {

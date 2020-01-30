@@ -217,6 +217,9 @@ final class Native {
     public final native Result<RPtr> bip32PublicKeyFromBech32(String bech32Str);
     public final native Result<String> bip32PublicKeyToBech32(RPtr bip32PublicKey);
 
+    // PoolId
+    public final native Result<RPtr> poolIdFromHex(String hexString);
+
     // DelegationType
     public final native Result<RPtr> delegationTypeNonDelegated();
     public final native Result<RPtr> delegationTypeFull(RPtr poolId);

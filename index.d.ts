@@ -320,24 +320,24 @@ export class Transaction extends Ptr {
 */
 export class PerCertificateFee extends Ptr {
   /**
-  * @returns {Promise<PerCertificateFee>} 
+  * @returns {Promise<PerCertificateFee>}
   */
   static new(): Promise<PerCertificateFee>;
 
   /**
-  * @param {Value} val 
+  * @param {Value} val
   * @returns {Promise<void>}
   */
   set_pool_registration(val: Value): Promise<void>;
 
   /**
-  * @param {Value} val 
+  * @param {Value} val
   * @returns {Promise<void>}
   */
   set_stake_delegation(val: Value): Promise<void>;
 
   /**
-  * @param {Value} val 
+  * @param {Value} val
   * @returns {Promise<void>}
   */
   set_owner_stake_delegation(val: Value): Promise<void>;
@@ -901,7 +901,13 @@ export class StakeDelegationAuthData extends Ptr {
 
 /**
 */
-export class PoolId extends Ptr { }
+export class PoolId extends Ptr {
+  /**
+  * @param {string} hex_string
+  * @returns {Promise<PoolId>}
+  */
+  static from_hex(hex_string: string): Promise<PoolId>;
+}
 
 /**
 * Delegation Ratio type express a number of parts
