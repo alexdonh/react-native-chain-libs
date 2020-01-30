@@ -1089,6 +1089,16 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
                 .pour(promise);
     }
 
+    // PoolId
+
+    @ReactMethod
+    public final void poolIdFromHex(String hexString, Promise promise) {
+        Native.I
+                .poolIdFromHex(hexString)
+                .map(RPtr::toJs)
+                .pour(promise);
+    }
+
     // DelegationType
 
     @ReactMethod

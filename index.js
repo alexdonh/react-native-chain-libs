@@ -1415,7 +1415,16 @@ export class StakeDelegationAuthData extends Ptr {
 
 /**
 */
-export class PoolId extends Ptr { }
+export class PoolId extends Ptr {
+    /**
+    * @param {string} hex_string
+    * @returns {Promise<PoolId>}
+    */
+    static async from_hex(hexString) {
+        const ret = await ChainLibs.poolIdFromHex(hexString);
+        return Ptr._wrap(ret, PoolId);
+    }
+}
 
 /**
 * Delegation Ratio type express a number of parts
