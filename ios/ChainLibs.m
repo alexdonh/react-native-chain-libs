@@ -1127,6 +1127,17 @@ RCT_EXPORT_METHOD(payloadNoPayload:(RCTPromiseResolveBlock)resolve andReject:(RC
     }] exec:nil andResolve:resolve orReject:reject];
 }
 
+RCT_EXPORT_METHOD(payloadCertificate:(nonnull NSString *)certificatePtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSString* certificatePtr, CharPtr* error) {
+        RPtr result;
+        RPtr certificate = [certificatePtr rPtr];
+        return payload_certificate(certificate, &result, error)
+            ? [NSString stringFromPtr:result]
+            : nil;
+    }] exec:certificatePtr andResolve:resolve orReject:reject];
+}
+
 RCT_EXPORT_METHOD(stakeDelegationAuthDataNew:(nonnull NSString *)signaturePtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
 {
     [[CSafeOperation new:^NSString*(NSString* signaturePtr, CharPtr* error) {

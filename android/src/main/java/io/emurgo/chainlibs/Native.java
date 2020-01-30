@@ -174,6 +174,7 @@ final class Native {
 
     // Payload
     public final native Result<RPtr> payloadNoPayload();
+    public final native Result<RPtr> payloadCertificate(RPtr Certificate);
 
     // StakeDelegationAuthData
     public final native Result<RPtr> stakeDelegationAuthDataNew(RPtr signature);
