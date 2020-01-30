@@ -19,6 +19,7 @@ mod output_policy;
 mod payload;
 mod payload_auth_data;
 mod per_certificate_fee;
+mod pool_id;
 mod private_key;
 mod ptr_c;
 mod public_key;
