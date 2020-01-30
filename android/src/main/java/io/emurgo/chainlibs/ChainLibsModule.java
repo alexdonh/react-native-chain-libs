@@ -841,9 +841,9 @@ public class ChainLibsModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public final void payloadCertificate(Promise promise) {
+    public final void payloadCertificate(String certificate, Promise promise) {
         Native.I
-                .payloadCertificate()
+                .payloadCertificate(new RPtr(certificate))
                 .map(RPtr::toJs)
                 .pour(promise);
     }
