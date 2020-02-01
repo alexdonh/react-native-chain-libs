@@ -1128,6 +1128,17 @@ RCT_EXPORT_METHOD(payloadAuthDataForNoPayload:(RCTPromiseResolveBlock)resolve an
     }] exec:nil andResolve:resolve orReject:reject];
 }
 
+RCT_EXPORT_METHOD(payloadAuthDataForStakeDelegation:(nonnull NSString *)stakeDelegationAuthDataPtr withResolve:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
+{
+    [[CSafeOperation new:^NSString*(NSString* stakeDelegationAuthDataPtr, CharPtr* error) {
+        RPtr result;
+        RPtr stakeDelegationAuthData = [stakeDelegationAuthDataPtr rPtr];
+        return payload_auth_data_for_stake_delegation(stakeDelegationAuthData, &result, error)
+            ? [NSString stringFromPtr:result]
+            : nil;
+    }] exec:stakeDelegationAuthDataPtr andResolve:resolve orReject:reject];
+}
+
 RCT_EXPORT_METHOD(payloadNoPayload:(RCTPromiseResolveBlock)resolve andReject:(RCTPromiseRejectBlock)reject)
 {
     [[CSafeOperation new:^NSString*(id _void, CharPtr* error) {

@@ -174,6 +174,7 @@ final class Native {
 
     // PayloadAuthData
     public final native Result<RPtr> payloadAuthDataForNoPayload();
+    public final native Result<RPtr> payloadAuthDataForStakeDelegation(RPtr authData);
 
     // Payload
     public final native Result<RPtr> payloadNoPayload();
