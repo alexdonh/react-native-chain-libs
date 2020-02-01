@@ -715,6 +715,12 @@ export class PayloadAuthData extends Ptr {
   * @returns {Promise<PayloadAuthData>}
   */
   static for_no_payload(): Promise<PayloadAuthData>;
+
+  /**
+  * @param {StakeDelegationAuthData} auth_data
+  * @returns {Promise<PayloadAuthData>}
+  */
+  static for_stake_delegation(auth_data: StakeDelegationAuthData): Promise<PayloadAuthData>;
 }
 
 /**

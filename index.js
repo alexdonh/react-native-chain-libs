@@ -1148,6 +1148,16 @@ export class PayloadAuthData extends Ptr {
         const ret = await ChainLibs.payloadAuthDataForNoPayload();
         return Ptr._wrap(ret, PayloadAuthData);
     }
+
+    /**
+    * @param {StakeDelegationAuthData} auth_data
+    * @returns {Promise<PayloadAuthData>}
+    */
+    static async for_stake_delegation(auth_data) {
+        const authDataPtr = Ptr._assertClass(auth_data, StakeDelegationAuthData);
+        const ret = await ChainLibs.payloadAuthDataForStakeDelegation(authDataPtr);
+        return Ptr._wrap(ret, PayloadAuthData);
+    }
 }
 
 /**
