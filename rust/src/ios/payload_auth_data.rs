@@ -1,6 +1,6 @@
 use super::result::CResult;
 use super::string::CharPtr;
-use crate::panic::handle_exception;
+use crate::panic::{handle_exception, handle_exception_result};
 use crate::ptr::{RPtr, RPtrRepresentable};
 use js_chain_libs::{PayloadAuthData, StakeDelegationAuthData};
 
