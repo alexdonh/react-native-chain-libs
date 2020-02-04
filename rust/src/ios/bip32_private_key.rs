@@ -4,15 +4,17 @@ use super::string::{CharPtr, IntoCString, IntoStr};
 use crate::panic::{handle_exception, handle_exception_result, ToResult};
 use crate::ptr::{RPtr, RPtrRepresentable};
 use js_chain_libs::Bip32PrivateKey;
+use std::convert::TryFrom;
 
 #[no_mangle]
 pub unsafe extern "C" fn bip_32_private_key_derive(
-  bip_32_private_key: RPtr, index: u32, result: &mut RPtr, error: &mut CharPtr
+  bip_32_private_key: RPtr, index: i64, result: &mut RPtr, error: &mut CharPtr
 ) -> bool {
   handle_exception_result(|| {
+    let idx_u32 = u32::try_from(index).map_err(|err| err.to_string())?;
     bip_32_private_key
       .typed_ref::<Bip32PrivateKey>()
-      .map(|bip_32_private_key| bip_32_private_key.derive(index))
+      .map(|bip_32_private_key| bip_32_private_key.derive(idx_u32))
   })
   .map(|bip_32_private_key| bip_32_private_key.rptr())
   .response(result, error)
