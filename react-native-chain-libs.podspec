@@ -21,14 +21,15 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,swift,sh}"
   s.requires_arc = true
 
-  s.script_phase = {
-    :name => "Build Rust Binary",
-    :script => 'bash "${PODS_TARGET_SRCROOT}/ios/build.sh"',
-    :execution_position => :before_compile
-  }
+  # s.script_phase = {
+  #   :name => "Build Rust Binary",
+  #   :script => 'bash "${PODS_TARGET_SRCROOT}/ios/build.sh"',
+  #   :execution_position => :before_compile
+  # }
 
   s.pod_target_xcconfig = {
-    "HEADER_SEARCH_PATHS" => "$(CONFIGURATION_BUILD_DIR)",
+    "HEADER_SEARCH_PATHS" => "$(PODS_TARGET_SRCROOT)/ios/rust",
+    "LIBRARY_SEARCH_PATHS" => "$(PODS_TARGET_SRCROOT)/ios/rust",
     "OTHER_LIBTOOLFLAGS" => "-lreact_native_chain_libs",
     "ENABLE_BITCODE" => "NO"
   }
