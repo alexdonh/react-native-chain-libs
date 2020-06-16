@@ -16,7 +16,6 @@ yarn.lock
 
 # Xcode
 #
-build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -36,7 +35,6 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
-build/
 .idea
 .gradle
 local.properties
@@ -48,3 +46,4 @@ gradle-wrapper*
 buck-out/
 \.buckd/
 *.keystore
+

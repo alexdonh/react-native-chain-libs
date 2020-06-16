@@ -135,19 +135,19 @@ afterEvaluate { project ->
         include '**/*.java'
     }
 
-    android.libraryVariants.all { variant ->
-        def name = variant.name.capitalize()
-        task "jar${name}"(type: Jar, dependsOn: variant.javaCompileProvider) {
-            from variant.javaCompileProvider.get().destinationDir
-        }
+    // android.libraryVariants.all { variant ->
+    //     def name = variant.name.capitalize()
+    //     task "jar${name}"(type: Jar, dependsOn: variant.javaCompileProvider) {
+    //         from variant.javaCompileProvider.get().destinationDir
+    //     }
 
-        def productFlavor = ""
-        variant.productFlavors.each {
-            productFlavor += "${it.name.capitalize()}"
-        }
-        def buildType = "${variant.buildType.name.capitalize()}"
-        tasks["generate${productFlavor}${buildType}Assets"].dependsOn(tasks["cargoBuild"])
-    }
+    //     def productFlavor = ""
+    //     variant.productFlavors.each {
+    //         productFlavor += "${it.name.capitalize()}"
+    //     }
+    //     def buildType = "${variant.buildType.name.capitalize()}"
+    //     tasks["generate${productFlavor}${buildType}Assets"].dependsOn(tasks["cargoBuild"])
+    // }
 
     artifacts {
         archives androidSourcesJar
