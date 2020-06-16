@@ -61,7 +61,7 @@ cargo {
     libname = 'react_native_chain_libs'
     targets = ['arm', 'arm64', 'x86', 'x86_64']
     apiLevel = safeExtGet('ndkApiLevel', DEFAULT_NDK_API_LEVEL)
-    prebuiltToolchains = true
+    prebuiltToolchains = false
 }
 
 repositories {
